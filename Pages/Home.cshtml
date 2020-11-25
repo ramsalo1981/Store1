@@ -1,0 +1,12 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<p>Home</p>
+
+<p>@Model.Mes</p>
+
+<a asp-page="/Items/ShowItems" asp-route-Id="1">Item 1</a>
+<a asp-page="/Items/ShowItems" asp-route-Id="2">Item 2</a>

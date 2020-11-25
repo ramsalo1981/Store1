@@ -1,0 +1,57 @@
+﻿@page
+@model Market.Pages.Items.EditModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<div class="container">
+    <form method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label asp-for="@Model.Item.Id">ID</label>
+            <input type="text" disabled class="form-control" asp-for="@Model.Item.Id" placeholder="Enter Id">
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.Item.ItemName">Item name</label>
+            <input type="text" class="form-control" asp-for="@Model.Item.ItemName" placeholder="Enter name">
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.Item.ItemPrice">Item Price</label>
+            <input type="text" class="form-control" asp-for="@Model.Item.ItemPrice" placeholder="Enter price">
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.Item.Groups.GroupName">Group name</label>
+            <select asp-for="@Model.Item.Groups.Id" asp-items="@(new SelectList(Model.AllGroups,"Id","GroupName"))"></select>
+        </div>
+        <div class="form-group custom-file">
+            <input type="file" class="custom-file-input" asp-for="RFile" />
+            <label class="custom-file-label" asp-for="RFile" id="LImage">Select image</label>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a class="btn btn-outline-info" asp-page="/Items/ShowItems">Cancle</a>
+    </form>
+
+    <div class="form-group">
+        <img id="NewImage" src="/Images/@Model.Item.ImagePath" alt="Eagle" style="width:300px;" />
+        <script>
+        $('input[type=file]').change(function () {
+
+            var url = $(this).val();
+            $('#LImage').html(url.split("\\").pop());
+            var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+            if ((ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) {
+
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#NewImage').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+
+        </script>
+    </div>
+</div>

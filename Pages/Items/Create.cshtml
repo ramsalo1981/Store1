@@ -1,0 +1,63 @@
+﻿@page
+@model Market.Pages.Items.CreateModel
+@{
+    ViewData["Title"] = "Create New Item";
+}
+
+<h2>Create New Item</h2>
+
+<div class="container">
+    <form method="post" enctype="multipart/form-data">
+        @*<div class="form-group">
+            <label asp-for="@Model.Item.Id">ID</label>
+            <input type="text" class="form-control" asp-for="@Model.Item.Id" placeholder="Enter Id">
+        </div>*@
+        @if (Model.Message != null)
+        {
+            <h3 class="alert alert-danger">@Model.Message</h3>
+        }
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+        <div class="form-group">
+            <label asp-for="Item.ItemName">Item name</label>
+            <input type="text" class="form-control" asp-for="Item.ItemName" placeholder="Enter name">
+            <span asp-validation-for="Item.ItemName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Item.ItemPrice">Item Price</label>
+            <input type="text" class="form-control" asp-for="Item.ItemPrice" placeholder="Enter price">
+            <span asp-validation-for="Item.ItemPrice" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Item.Groups.GroupName">Group name</label>
+            <select asp-for="Item.Groups.Id" asp-items="@(new SelectList(Model.AllGroups,"Id","GroupName"))"></select>
+        </div>
+        <div class="form-group custom-file">
+            <input type="file" class="custom-file-input" asp-for="RFile"/>
+            <label class="custom-file-label" asp-for="RFile" id="LImage">Select image</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a class="btn btn-outline-info" asp-page="/Items/ShowItems">Cancle</a>
+    </form>
+
+    <img style="width:300px" id="NewImage" />
+    <script>
+        $('input[type=file]').change(function () {
+
+            var url = $(this).val();
+            $('#LImage').html(url.split("\\").pop());
+            var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+            if ((ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) {
+
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#NewImage').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+
+    </script>
+</div>

@@ -1,0 +1,21 @@
+﻿.footer {
+    background-color: green;
+    color: white;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    bottom: 0px;
+}
+
+.mydiv {
+    border: solid;
+}
+
+.mydiv2 {
+    border: solid;
+    padding: 0px;
+}
+
+.myrow {
+    height: 600px;
+}

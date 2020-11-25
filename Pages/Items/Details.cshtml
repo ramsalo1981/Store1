@@ -1,0 +1,34 @@
+﻿@page
+@model Market.Pages.Items.DetailsModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Item Details</h2>
+
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Group Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.Item.Id</td>
+                <td>@Model.Item.ItemName</td>
+                <td>@Model.Item.ItemPrice</td>
+                <td>@Model.Item.Groups.GroupName</td>
+            </tr>
+            <tr>
+
+        </tbody>
+    </table>
+</div>
+<div class="container">
+    <a class="btn btn-primary" asp-page="/Items/Edit" asp-route-id="@Model.Item.Id">Edit</a> |
+    <a class="btn btn-outline-info" asp-page="/Items/ShowItems">back to Groups</a>
+</div>
